@@ -6,7 +6,7 @@
   "files": [
     "build/"
   ],
-  "bin": "build/index.js",
+  "bin": "bin/jest-benchmark.js",
   "scripts": {
     "test": "jest",
     "lint": "eslint . --config ./.eslintrc.json --no-eslintrc",
