@@ -4,6 +4,7 @@
   "author": "Rogelio Guzman <rogelioguzmanh@gmail.com>",
   "license": "MIT",
   "files": [
+    "bin/",
     "build/"
   ],
   "bin": "bin/jest-benchmark.js",
