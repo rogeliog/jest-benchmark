@@ -1,0 +1,46 @@
+{
+  "version": "0.0.1",
+  "main": "build",
+  "author": "Rogelio Guzman <rogelioguzmanh@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "build/"
+  ],
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint . --config ./.eslintrc.json --no-eslintrc",
+    "watch": "babel src -w --ignore **/*.test.js -d build",
+    "prebuild": "rimraf build/",
+    "build": "babel src --ignore **/*.test.js -d build",
+    "prepublish": "yarn build",
+    "format": "prettier --write \"**/*.js\""
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jest": "^21.22.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "jest": "^23.6.0",
+    "jest-watch-typeahead": "^0.2.0",
+    "prettier": "^1.14.3"
+  },
+  "prettier": {
+    "proseWrap": "never",
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "name": "jest-benchmark",
+  "description": "Benchmark Jest test runs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rogeliog/jest-benchmark.git"
+  },
+  "homepage": "https://github.com/rogeliog/jest-benchmark"
+}
