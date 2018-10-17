@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "build",
   "author": "Rogelio Guzman <rogelioguzmanh@gmail.com>",
   "license": "MIT",
@@ -37,7 +37,7 @@
     "singleQuote": true,
     "trailingComma": "all"
   },
-  "name": "jest-benchmark",
+  "name": "jest-benchmarks",
   "description": "Benchmark Jest test runs",
   "repository": {
     "type": "git",
