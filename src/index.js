@@ -75,8 +75,8 @@ const executeBenchmark = async () => {
   console.log(`Command: jest ${args.join(' ')}`);
   console.log(`Number of runs: ${NUM_RUNS}`);
   console.log(`Average: ${average}s`);
-  console.log(`Max: ${min}s`);
-  console.log(`Min: ${max}s`);
+  console.log(`Max: ${max}s`);
+  console.log(`Min: ${min}s`);
 };
 
 executeBenchmark();
