@@ -6,7 +6,7 @@ A simple way to run benchmarks on Jest
 npx jest-benchmarks
 ```
 
-Number of runs: 1 Average: 2.879s Max: 2.879s Min: 2.879s
+![demo](https://cdn.discordapp.com/attachments/502279239341703168/502517216411910144/jest-benchmarks.gif)
 
 ## Options
 
