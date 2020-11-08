@@ -1,17 +1,10 @@
 import execa from 'execa';
-import ansiEscapes from 'ansi-escapes';
 import ora from 'ora';
 
 const NUM_RUNS = process.env.NUM_RUNS || 10;
 const JEST_BIN = process.env.JEST_BIN || 'node_modules/.bin/jest';
 
 const args = process.argv.slice(2);
-
-const printOnCurrentLine = text => {
-  process.stdout.write(ansiEscapes.eraseLine);
-  process.stdout.write(ansiEscapes.cursorLeft);
-  process.stdout.write(text);
-};
 
 const runJest = async () =>
   execa.stdout(JEST_BIN, [...args, '--useStderr', '--json']);
@@ -20,15 +13,16 @@ const runTests = async ({
   times,
   results = [],
   onTestRunCompleted = () => {},
+  // eslint-disable-next-line consistent-return
 }) => {
   if (times <= 0) {
     return results;
   }
   try {
-    const stdout = await runJest();
-    const end = +new Date();
-    const { startTime } = JSON.parse(stdout);
-    const duration = (end - startTime) / 1000;
+    const startTime = process.hrtime.bigint();
+    await runJest();
+    const end = process.hrtime.bigint();
+    const duration = Number(end - startTime) / 1000000000;
 
     onTestRunCompleted({ times });
 
@@ -58,9 +52,9 @@ const executeBenchmark = async () => {
   const results = await runTests({
     times: NUM_RUNS,
     onTestRunCompleted: ({ times }) => {
-      testRunsSpinner.text = `Test runs completed: ${NUM_RUNS -
-        times +
-        1}/${NUM_RUNS}`;
+      testRunsSpinner.text = `Test runs completed: ${
+        NUM_RUNS - times + 1
+      }/${NUM_RUNS}`;
     },
   });
 
@@ -68,8 +62,14 @@ const executeBenchmark = async () => {
 
   const totalTime = results.reduce((sum, r) => sum + r, 0);
   const average = (totalTime / NUM_RUNS).toFixed(3);
-  const max = results.reduce((max, r) => (r > max ? r : max), 0);
-  const min = results.reduce((min, r) => (r < min ? r : min), Infinity);
+  const max = results.reduce(
+    (currentMax, r) => (r > currentMax ? r : currentMax),
+    0,
+  );
+  const min = results.reduce(
+    (currentMin, r) => (r < currentMin ? r : currentMin),
+    Infinity,
+  );
 
   console.log();
   console.log(`Command: jest ${args.join(' ')}`);
